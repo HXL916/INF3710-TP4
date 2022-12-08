@@ -35,13 +35,13 @@ export class CommunicationService {
 
   public updatePlan(plan: Planrepas): Observable<number> {
     return this.http
-      .put<number>(this.BASE_URL + "/planrepas", plan)
+      .put<number>(this.BASE_URL + "/planrepas/", plan)
       .pipe(catchError(this.handleError<number>("updatePlan")));
   }
 
-  public deletePlan(planNB: number): Observable<number> {
+  public deletePlan(numeroPlan: number): Observable<number> {
     return this.http
-      .post<number>(this.BASE_URL + "/planrepas" + planNB, {})
+      .delete<number>(this.BASE_URL + `/planrepas/${numeroPlan}`)
       .pipe(catchError(this.handleError<number>("deletePlan")));
   }
 

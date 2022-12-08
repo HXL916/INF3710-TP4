@@ -5,6 +5,7 @@ import {PlanrepasDB} from "../../../common/tables/DataBaseClasses";
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";
 import { Planrepas } from "../../../common/tables/Planrepas";
+import { ParameterizedQuery } from "pg-promise";
 
 @injectable()
 export class DatabaseController {
@@ -62,18 +63,19 @@ export class DatabaseController {
         });
     });
 
-    // router.post("/hotels/delete/:hotelNb",(req: Request, res: Response, _: NextFunction) => {
-    //     const hotelNb: string = req.params.hotelNb;
-    //     this.databaseService
-    //       .deleteHotel(hotelNb)
-    //       .then((result: pg.QueryResult) => {
-    //         res.json(result.rowCount);
-    //       })
-    //       .catch((e: Error) => {
-    //         console.error(e.stack);
-    //       });
-    //   }
-    // );
+    router.delete('/planrepas/:numeroplan', (req: Request, res: Response, next: NextFunction) => {
+      const numéroplan: string = req.params.numeroplan;
+
+      this.databaseService
+        .deletePlan(numéroplan)
+        .then((result: pg.QueryResult) => {
+          res.json(result.rowCount);
+        })
+        .catch((e: Error) => {
+          console.error(e.stack);
+          res.json(-1);
+        });    
+    });
 
     return router;
   }

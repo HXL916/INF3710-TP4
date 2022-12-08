@@ -58,11 +58,11 @@ export class DatabaseService {
     return res;
   }
 
-  public async deletePlan(hotelNb: string): Promise<pg.QueryResult> {
-    if (hotelNb.length === 0) throw new Error("Invalid delete query");
+  public async deletePlan(numeroplan: string): Promise<pg.QueryResult> {
+    if (!numeroplan) throw new Error("La clé primaire est invalide !");
 
     const client = await this.pool.connect();
-    const query = `DELETE FROM HOTELDB.Hotel WHERE hotelNb = '${hotelNb}';`;
+    const query = `DELETE FROM public.planrepas WHERE numéroplan = '${numeroplan}';`;
 
     const res = await client.query(query);
     client.release();

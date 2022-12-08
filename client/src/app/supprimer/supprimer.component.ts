@@ -29,7 +29,7 @@ export class SupprimerComponent implements OnInit {
     this.selectedPlan = this.plans[planID];
   }
   public deletePlan(planID: number) {
-    this.communicationService.deletePlan(planID).subscribe((res: any) => {
+    this.communicationService.deletePlan(planID).subscribe((res: number) => {
       this.refresh();
     });
   }

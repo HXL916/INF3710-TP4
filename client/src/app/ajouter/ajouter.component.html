@@ -1,9 +1,9 @@
 
 <div id="planrepas">
     <h1>Ajouter un plan</h1>
-  
+
     <div class="divider"></div>
-  
+
     <table id="ht" align="center" border="1" width="1000" class="table-striped table-hover">
       <thead class="header">
         <th class="contentCell">numéro planrepas</th>
@@ -24,7 +24,7 @@
           <td class="contentCell" contenteditable="true" >{{ plan.price }}</td>
           <td class="contentCell" contenteditable="true" >{{ plan.numberF }}</td>
         </tr>
-  
+
         <tr class="blank_row">
           <td class="contentCell" contenteditable="true" placeholder="211" #newNumber></td>
           <td class="contentCell" contenteditable="true" placeholder="1" #newCategory></td>
@@ -36,10 +36,10 @@
           <td class="contentCell"></td>
       </tr>
       <mat-dialog-actions>
-        <button type="button" class="btn" (click)="insertPlan()">+</button>
+        <button type="button" class="btn" (click)="insertPlan()">Insert</button>
         <button mat-button mat-dialog-close>Confirm</button>
       </mat-dialog-actions>
       </tbody>
     </table>
-  
+
   </div>

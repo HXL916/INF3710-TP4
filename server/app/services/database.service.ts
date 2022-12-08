@@ -9,9 +9,9 @@ import { Planrepas} from "../../../common/tables/Planrepas";
 export class DatabaseService {
   // TODO: A MODIFIER POUR VOTRE BD
   public connectionConfig: pg.ConnectionConfig = {
-    user: "user",
-    database: "tp4_livraison",
-    password: "1",
+    user: "postgres",
+    database: "TP4_Livraison",
+    password: "d2Xvq5-f*L3V",
     port: 5432,
     host: "127.0.0.1",
     keepAlive: true,

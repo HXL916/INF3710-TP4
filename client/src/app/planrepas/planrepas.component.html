@@ -1,0 +1,38 @@
+<div id="planrepas">
+  <h1>Clients</h1>
+
+  <div class="divider"></div>
+
+  <table id="ht" align="center" border="1" width="1000" class="table-striped table-hover">
+    <thead class="header">
+      <th class="contentCell">numéro planrepas</th>
+      <th class="contentCell">catégorie</th>
+      <th class="contentCell">fréquence</th>
+      <th class="contentCell">nombre de personnes</th>
+      <th class="contentCell">calories</th>
+      <th class="contentCell">prix</th>
+      <th class="contentCell">numéro fournisseur</th>
+      <th class="actionCell">ACTION</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let plan of plans; let i = index">
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelName($event, i)">{{ plan.number}}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.category }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.frequency }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.persons }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.calories }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.price }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.numberF }}</td>
+      </tr>
+
+      <tr class="blank_row">
+        <td class="contentCell" contenteditable="true" placeholder="New Number" #newHotelNb></td>
+        <td class="contentCell" contenteditable="true" placeholder="New Name" #newHotelName></td>
+        <td class="contentCell" contenteditable="true" placeholder="New City" #newHotelCity></td>
+        <td class="contentCell"></td>
+    </tr>
+
+    </tbody>
+  </table>
+
+</div>

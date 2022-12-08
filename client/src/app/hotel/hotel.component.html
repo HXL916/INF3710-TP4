@@ -1,0 +1,44 @@
+<div id="hotel">
+  <h1>Clients</h1>
+
+  <div class="divider"></div>
+
+  <table id="ht" align="center" border="1" width="1000" class="table-striped table-hover">
+    <thead class="header">
+      <th class="contentCell">Client NUMBER</th>
+      <th class="contentCell">Client NAME</th>
+      <th class="contentCell">Client SURNAME</th>
+      <th class="contentCell">Client email</th>
+      <th class="contentCell">Client street</th>
+      <th class="contentCell">Client city</th>
+      <th class="contentCell">Client postcode</th>
+      <th class="actionCell">ACTION</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients; let i = index">
+        <td class="contentCell">{{ client.number }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelName($event, i)">{{ client.name}}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ client.surname }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ client.adresse }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ client.street }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ client.city }}</td>
+        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ client.postcode }}</td>
+        <td class="actionCell">
+          <button type="button" class="submitbtn" (click)="updateHotel(i)"><i class="fa fa-edit"></i></button>
+          <button type="button" class="deletebtn" (click)="deleteHotel(client.number)"><i class="fa fa-trash-o"></i></button>
+        </td>
+      </tr>
+
+      <tr class="blank_row">
+        <td class="contentCell" contenteditable="true" placeholder="New Number" #newHotelNb></td>
+        <td class="contentCell" contenteditable="true" placeholder="New Name" #newHotelName></td>
+        <td class="contentCell" contenteditable="true" placeholder="New City" #newHotelCity></td>
+        <td class="contentCell"></td>
+    </tr>
+
+    </tbody>
+  </table>
+
+  <button type="button" class="btn" (click)="insertHotel()">+</button>
+
+</div>

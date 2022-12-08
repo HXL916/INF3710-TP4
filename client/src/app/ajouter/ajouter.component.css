@@ -41,6 +41,19 @@
     font-family: 'Varela Round', sans-serif;
 }
 
+.closeButton {
+  background-color: transparent;
+  position: fixed;
+  top: 23%;
+  right: 17%;
+  margin-bottom: 0%;
+  color: black;
+}
+
+.closeButton:hover {
+  color: var(--theme-purple);
+}
+
 [placeholder]:empty::before {
     content: attr(placeholder);
     color: #9A75F0BB;

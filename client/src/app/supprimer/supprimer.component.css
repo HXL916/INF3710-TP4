@@ -35,6 +35,19 @@
     background-color: var(--theme-lightred-hover);
 }
 
+.closeButton {
+  background-color: transparent;
+  position: fixed;
+  top: 23%;
+  right: 17%;
+  margin-bottom: 0%;
+  color: black;
+}
+
+.closeButton:hover {
+  color: var(--theme-lightred);
+}
+
 [placeholder]:empty::before {
     content: attr(placeholder);
     color: var(--theme-red-placeholder);

@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Planrepas } from '../../../../common/tables/Planrepas';
 import { CommunicationService } from '../communication.service';
 
@@ -16,9 +17,9 @@ export class AjouterComponent implements OnInit {
   @ViewChild("newPrice") newPrice: ElementRef;
   @ViewChild("newVendorNumber") newVendorNumber: ElementRef;
 
-  public constructor(private communicationService: CommunicationService) {}
+  public constructor(private communicationService: CommunicationService, public matDialogRefAjouter: MatDialogRef<AjouterComponent>) {}
   public plans: Planrepas[] = [];
-  
+
   ngOnInit(): void {
   }
 
@@ -49,5 +50,9 @@ export class AjouterComponent implements OnInit {
     this.newCalories.nativeElement.innerText = "";
     this.newPrice.nativeElement.innerText = "";
     this.newVendorNumber.nativeElement.innerText = "";
+  }
+
+  public closeModale() {
+    this.matDialogRefAjouter.close();
   }
 }

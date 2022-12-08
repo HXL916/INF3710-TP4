@@ -26,12 +26,26 @@ export class PlanrepasComponent {
     });
   }
   openDialogAjouter(){
-    this.dialog.open(AjouterComponent);
+    this.dialog.open(AjouterComponent, {
+      width: '70%',
+      height: '60%',
+      disableClose: true,
+    });
   }
+
   openDialogModifier(){
-    this.dialog.open(ModifierComponent);
+    this.dialog.open(ModifierComponent, {
+      width: '70%',
+      height: '60%',
+      disableClose: true,
+    });
   }
+
   openDialogSupprimer(){
-    this.dialog.open(SupprimerComponent);
+    this.dialog.open(SupprimerComponent, {
+      width: '70%',
+      height: '60%',
+      disableClose: true,
+    });
   }
 }

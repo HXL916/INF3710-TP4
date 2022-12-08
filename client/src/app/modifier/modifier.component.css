@@ -35,9 +35,22 @@
     background-color: var(--theme-lightblue-hover);
 }
 
+.closeButton {
+  background-color: transparent;
+  position: fixed;
+  top: 23%;
+  right: 17%;
+  margin-bottom: 0%;
+  color: black;
+}
+
+.closeButton:hover {
+  color: var(--theme-lightblue);
+}
+
 [placeholder]:empty::before {
     content: attr(placeholder);
-    color: var(--theme-lightblue-placeholder); 
+    color: var(--theme-lightblue-placeholder);
 }
 
 [placeholder]:empty:focus::before {
@@ -48,14 +61,14 @@
     color: var(--theme-lightblue);
 }
 
-.blank_row:not(.nohover):hover { 
-    color: var(--theme-lightblue); 
+.blank_row:not(.nohover):hover {
+    color: var(--theme-lightblue);
 }
 
 .deletebtn {
     border-radius: 4px;
-    color: white; 
-    background-color: #9A75F0; 
+    color: white;
+    background-color: #9A75F0;
     border-style: none;
 }
 

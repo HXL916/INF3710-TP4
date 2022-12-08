@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-
+import { MatDialogRef } from '@angular/material/dialog';
 import { Planrepas } from "../../../../common/tables/Planrepas";
 import { CommunicationService } from "../communication.service";
 
@@ -12,7 +12,7 @@ import { CommunicationService } from "../communication.service";
 export class ModifierComponent implements OnInit {
   public plans: Planrepas[] = [];
   public selectedPlan: Planrepas;
-  public constructor(private communicationService: CommunicationService) {}
+  public constructor(private communicationService: CommunicationService, public matDialogRefModifier: MatDialogRef<ModifierComponent>) {}
 
   public ngOnInit(): void {
     this.getPlans();
@@ -35,6 +35,10 @@ export class ModifierComponent implements OnInit {
   }
   private refresh() {
     this.getPlans();
+  }
+
+  public closeModale() {
+    this.matDialogRefModifier.close();
   }
 }
 

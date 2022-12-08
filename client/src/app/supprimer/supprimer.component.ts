@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-
+import { MatDialogRef } from '@angular/material/dialog';
 import { CommunicationService } from "../communication.service";
 import { Planrepas } from "../../../../common/tables/Planrepas";
 
@@ -11,7 +11,7 @@ import { Planrepas } from "../../../../common/tables/Planrepas";
 export class SupprimerComponent implements OnInit {
   public plans: Planrepas[] = [];
   public selectedPlan: Planrepas;
-  public constructor(private communicationService: CommunicationService) {}
+  public constructor(private communicationService: CommunicationService, private matDialogRefSupprimer: MatDialogRef<SupprimerComponent>) {}
 
   public ngOnInit(): void {
     this.getPlans();
@@ -35,5 +35,9 @@ export class SupprimerComponent implements OnInit {
   }
   private refresh() {
     this.getPlans();
+  }
+
+  public closeModale() {
+    this.matDialogRefSupprimer.close();
   }
 }

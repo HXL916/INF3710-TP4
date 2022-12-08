@@ -11,7 +11,7 @@ import { CommunicationService } from "../communication.service";
 
 export class ModifierComponent implements OnInit {
   public plans: Planrepas[] = [];
-
+  public selectedPlan: Planrepas;
   public constructor(private communicationService: CommunicationService) {}
 
   public ngOnInit(): void {
@@ -21,9 +21,12 @@ export class ModifierComponent implements OnInit {
   public getPlans(): void {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
+      this.selectedPlan = plans[0];
       console.log(plans);
     });
-
-}
+  }
+  public updateSelectedPlan(planID: any) {
+    this.selectedPlan = this.plans[planID];
+  }
 }
 

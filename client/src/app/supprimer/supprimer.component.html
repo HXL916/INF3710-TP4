@@ -6,32 +6,36 @@
   <div class="container contentSelect">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="hotelSelect">Hotel</label>
+        <label class="input-group-text" for="hotelSelect">Plan</label>
       </div>
-
+      <select class="custom-select" id="hotelSelect" (change)="updateSelectedPlan($event.target.options.selectedIndex)">
+        <option *ngFor="let plan of plans">{{ plan.number }}</option>
+      </select>
     </div>
   </div>
 
-  <div class="container contentSelect">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text" for="roomSelect">Room</label>
-      </div>
-
-
-    </div>
-  </div>
 
   <table id="ht" align="center" border="1" width="1000" class="table-striped table-hover">
     <thead class="header">
-      <th class="contentCell">GUEST NUMBER</th>
-      <th class="contentCell">NAS</th>
-      <th class="contentCell">NAME</th>
-      <th class="contentCell">GENDER</th>
-      <th class="contentCell">CITY</th>
+      <th class="contentCell">numéro planrepas</th>
+      <th class="contentCell">catégorie</th>
+      <th class="contentCell">fréquence</th>
+      <th class="contentCell">nombre de personnes</th>
+      <th class="contentCell">calories</th>
+      <th class="contentCell">prix</th>
+      <th class="contentCell">numéro fournisseur</th>
     </thead>
     <tbody>
-
+      <tr>
+        <td class="contentCell" contenteditable="false" >{{ selectedPlan.number}}</td>
+        <td class="contentCell" contenteditable="false" >{{ selectedPlan.category }}</td>
+        <td class="contentCell" contenteditable="false" >{{ selectedPlan.frequency }}</td>
+        <td class="contentCell" contenteditable="false" >{{ selectedPlan.persons }}</td>
+        <td class="contentCell" contenteditable="false" >{{ selectedPlan.calories }}</td>
+        <td class="contentCell" contenteditable="false" >{{ selectedPlan.price }}</td>
+        <td class="contentCell" contenteditable="false" >{{ selectedPlan.numberF }}</td>
+      </tr>
     </tbody>
+    <button type="button" class="btn" >Supprimer</button>
   </table>
 </div>

@@ -9,11 +9,10 @@ import { Planrepas } from "../../../../common/tables/Planrepas";
   styleUrls: ["./supprimer.component.css"],
 })
 export class SupprimerComponent implements OnInit {
-
-  public duplicateError: boolean = false;
-
-  public constructor(private communicationService: CommunicationService) {}
   public plans: Planrepas[] = [];
+  public selectedPlan: Planrepas;
+  public constructor(private communicationService: CommunicationService) {}
+
   public ngOnInit(): void {
     this.getPlans();
   }
@@ -21,8 +20,11 @@ export class SupprimerComponent implements OnInit {
   public getPlans(): void {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
+      this.selectedPlan = plans[0];
       console.log(plans);
     });
   }
-
+  public updateSelectedPlan(planID: any) {
+    this.selectedPlan = this.plans[planID];
+  }
 }

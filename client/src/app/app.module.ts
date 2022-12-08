@@ -11,7 +11,7 @@ import { PlanrepasComponent } from "./planrepas/planrepas.component";
 import { AjouterComponent } from './ajouter/ajouter.component';
 import { ModifierComponent } from "./modifier/modifier.component";
 import { MatDialogModule } from "@angular/material/dialog";
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -28,7 +28,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    MatDialogModule
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
   providers: [CommunicationService],
   bootstrap: [AppComponent],

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Planrepas } from '../../../../common/tables/Planrepas';
+import { CommunicationService } from '../communication.service';
 
 @Component({
   selector: 'app-ajouter',
@@ -7,10 +8,44 @@ import { Planrepas } from '../../../../common/tables/Planrepas';
   styleUrls: ['./ajouter.component.css']
 })
 export class AjouterComponent implements OnInit {
-
-  constructor() { }
+  @ViewChild("newNumber") newNumber: ElementRef;
+  @ViewChild("newCategory") newCategory: ElementRef;
+  @ViewChild("newFrequency") newFrequency: ElementRef;
+  @ViewChild("newPersons") newPersons: ElementRef;
+  @ViewChild("newCalories") newCalories: ElementRef;
+  @ViewChild("newPrice") newPrice: ElementRef;
+  @ViewChild("newVendorNumber") newVendorNumber: ElementRef;
+  
+  public constructor(private communicationService: CommunicationService) {}
   public plans: Planrepas[] = [];
   ngOnInit(): void {
   }
+  public insertPlan(): void {
+    const plan: any = {
+      number: this.newNumber.nativeElement.innerText,
+      category: this.newCategory.nativeElement.innerText,
+      frequency: this.newFrequency.nativeElement.innerText,
+      persons: this.newPersons.nativeElement.innerText,
+      calories: this.newCalories.nativeElement.innerText,
+      price: this.newPrice.nativeElement.innerText,
+      numberF: this.newVendorNumber.nativeElement.innerText,
+    };
 
+    this.communicationService.insertPlan(plan).subscribe((res: number) => {
+      if (res > 0) {
+        this.communicationService.filter("update");
+      }
+      this.refresh();
+    });
+  }
+  
+  private refresh() {
+    this.newNumber.nativeElement.innerText = "";
+    this.newCategory.nativeElement.innerText = "";
+    this.newFrequency.nativeElement.innerText = "";
+    this.newPersons.nativeElement.innerText = "";
+    this.newCalories.nativeElement.innerText = "";
+    this.newPrice.nativeElement.innerText = "";
+    this.newVendorNumber.nativeElement.innerText = "";
+  }
 }

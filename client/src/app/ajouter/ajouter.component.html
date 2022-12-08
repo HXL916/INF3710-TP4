@@ -25,16 +25,16 @@
         </tr>
   
         <tr class="blank_row">
-          <td class="contentCell" contenteditable="true" placeholder="New Number" #newHotelNb></td>
-          <td class="contentCell" contenteditable="true" placeholder="1" #newHotelName></td>
-          <td class="contentCell" contenteditable="true" placeholder="1" #newHotelCity></td>
-          <td class="contentCell" contenteditable="true" placeholder="1" #newHotelNb></td>
-          <td class="contentCell" contenteditable="true" placeholder="(joules)" #newHotelName></td>
-          <td class="contentCell" contenteditable="true" placeholder="($)" #newHotelCity></td>
-          <td class="contentCell" contenteditable="true" placeholder="New Number" #newHotelNb></td>
+          <td class="contentCell" contenteditable="true" placeholder="211" #newNumber></td>
+          <td class="contentCell" contenteditable="true" placeholder="1" #newCategory></td>
+          <td class="contentCell" contenteditable="true" placeholder="1" #newFrequency></td>
+          <td class="contentCell" contenteditable="true" placeholder="1" #newPersons></td>
+          <td class="contentCell" contenteditable="true" placeholder="200" #newCalories></td>
+          <td class="contentCell" contenteditable="true" placeholder="20" #newPrice></td>
+          <td class="contentCell" contenteditable="true" placeholder="111111" #newVendorNumber></td>
           <td class="contentCell"></td>
       </tr>
-      <button type="button" class="btn" >+</button>
+      <button type="button" class="btn" (click)="insertPlan()">+</button>
   
       </tbody>
     </table>

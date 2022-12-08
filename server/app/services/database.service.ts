@@ -4,7 +4,6 @@ import "reflect-metadata";
 import { Room } from "../../../common/tables/Room";
 import { Client } from "../../../common/tables/Hotel";
 import { Gender, Guest } from "../../../common/tables/Guest";
-import { query } from "express";
 
 @injectable()
 export class DatabaseService {
@@ -29,17 +28,10 @@ export class DatabaseService {
   }
 
   // ======= HOTEL =======
-  public async createHotel(hotel: Hotel): Promise<pg.QueryResult> {
-    const client = await this.pool.connect();
-
-    if (!hotel.hotelnb || !hotel.name || !hotel.city)
-      throw new Error("Invalid create hotel values");
-
-    const values: string[] = [hotel.hotelnb, hotel.name, hotel.city];
-    const queryText: string = `INSERT INTO public.Hotel VALUES($1, $2, $3);`;
-
-    const res = await client.query(queryText, values);
-    client.release();
+  public async createHotel(client: Client): Promise<pg.QueryResult> {
+    const client2 = await this.pool.connect();
+    const res = await client2.query(`SELECT * FROM public.$};`);
+    client2.release();
     return res;
   }
 
@@ -68,26 +60,10 @@ export class DatabaseService {
   }
 
   // modify name or city of a hotel
-  public async updateHotel(hotel: Hotel): Promise<pg.QueryResult> {
-    const client = await this.pool.connect();
-
-    let toUpdateValues = [];
-
-    if (hotel.name.length > 0) toUpdateValues.push(`name = '${hotel.name}'`);
-    if (hotel.city.length > 0) toUpdateValues.push(`city = '${hotel.city}'`);
-
-    if (
-      !hotel.hotelnb ||
-      hotel.hotelnb.length === 0 ||
-      toUpdateValues.length === 0
-    )
-      throw new Error("Invalid hotel update query");
-
-    const query = `UPDATE HOTELDB.Hotel SET ${toUpdateValues.join(
-      ", "
-    )} WHERE hotelNb = '${hotel.hotelnb}';`;
-    const res = await client.query(query);
-    client.release();
+  public async updateHotel(client: Client): Promise<pg.QueryResult> {
+    const client2 = await this.pool.connect();
+    const res = await client2.query(`SELECT * FROM public.$};`);
+    client2.release();
     return res;
   }
 

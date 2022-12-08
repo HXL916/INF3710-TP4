@@ -3,6 +3,7 @@ import { inject, injectable } from "inversify";
 import * as pg from "pg";
 
 import { Client } from "../../../common/tables/Hotel";
+import {ClientDB} from "../../../common/tables/DataBaseClasses";
 import { HotelPK } from "../../../common/tables/HotelPK";
 import { Room } from "../../../common/tables/Room";
 import { Guest } from "../../../common/tables/Guest";
@@ -30,7 +31,7 @@ export class DatabaseController {
         .filterHotels(hotelNb, hotelName, hotelCity)
         .then((result: pg.QueryResult) => {
           const clients: Client[] = [];
-          result.rows.forEach((client: Client) => {
+          result.rows.forEach((client: ClientDB) => {
             clients.push({
               number: client.numéroclient,
               surname: client.prénomclient,
@@ -110,20 +111,6 @@ export class DatabaseController {
     router.put(
       "/hotels/update",
       (req: Request, res: Response, _: NextFunction) => {
-        const hotel: Hotel = {
-          hotelnb: req.body.hotelnb,
-          name: req.body.name ? req.body.name : "",
-          city: req.body.city ? req.body.city : "",
-        };
-
-        this.databaseService
-          .updateHotel(hotel)
-          .then((result: pg.QueryResult) => {
-            res.json(result.rowCount);
-          })
-          .catch((e: Error) => {
-            console.error(e.stack);
-          });
       }
     );
 

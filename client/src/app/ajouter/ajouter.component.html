@@ -1,3 +1,4 @@
+
 <div id="planrepas">
     <h1>Ajouter un plan</h1>
   
@@ -34,10 +35,11 @@
           <td class="contentCell" contenteditable="true" placeholder="111111" #newVendorNumber></td>
           <td class="contentCell"></td>
       </tr>
-      <button type="button" class="btn" (click)="insertPlan()">+</button>
-  
+      <mat-dialog-actions>
+        <button type="button" class="btn" (click)="insertPlan()">+</button>
+        <button mat-button mat-dialog-close>Confirm</button>
+      </mat-dialog-actions>
       </tbody>
     </table>
   
   </div>
-  

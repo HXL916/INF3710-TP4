@@ -1,20 +1,19 @@
-import { Component, ElementRef, ViewChild } from "@angular/core";
+import { Component } from "@angular/core";
 import { Planrepas } from "../../../../common/tables/Planrepas";
 import { CommunicationService } from "../communication.service";
-
+import {MatDialog} from '@angular/material/dialog';
+import { AjouterComponent } from "../ajouter/ajouter.component";
+import { ModifierComponent } from "../modifier/modifier.component";
+import { SupprimerComponent } from "../supprimer/supprimer.component";
 @Component({
   selector: "app-hotel",
   templateUrl: "./planrepas.component.html",
   styleUrls: ["./planrepas.component.css"],
 })
 export class PlanrepasComponent {
-  @ViewChild("newHotelNb") newHotelNb: ElementRef;
-  @ViewChild("newHotelName") newHotelName: ElementRef;
-  @ViewChild("newHotelCity") newHotelCity: ElementRef;
-
   public plans: Planrepas[] = [];
 
-  public constructor(private communicationService: CommunicationService) {}
+  public constructor(private communicationService: CommunicationService, public dialog: MatDialog) {}
 
   public ngOnInit(): void {
     this.getPlans();
@@ -26,5 +25,13 @@ export class PlanrepasComponent {
       console.log(plans);
     });
   }
-
+  openDialogAjouter(){
+    this.dialog.open(AjouterComponent);
+  }
+  openDialogModifier(){
+    this.dialog.open(ModifierComponent);
+  }
+  openDialogSupprimer(){
+    this.dialog.open(SupprimerComponent);
+  }
 }

@@ -8,7 +8,7 @@
       <div class="input-group-prepend">
         <label class="input-group-text" for="hotelSelect">Plan</label>
       </div>
-      <select class="custom-select" id="hotelSelect" (change)="updateSelectedPlan($event.target.options.selectedIndex)">
+      <select class="custom-select" id="hotelSelect" (change)="updateSelected($event.target.options.selectedIndex)">
         <option *ngFor="let plan of plans">{{ plan.number }}</option>
       </select>
     </div>
@@ -36,6 +36,6 @@
         <td class="contentCell" contenteditable="false" >{{ selectedPlan.numberF }}</td>
       </tr>
     </tbody>
-    <button type="button" class="btn" >Supprimer</button>
+    <button type="button" class="btn" (click)="deletePlan(selectedPlan.number)">Supprimer</button>
   </table>
 </div>

@@ -28,7 +28,7 @@ export class ModifierComponent implements OnInit {
   public updateSelected(planID: any) {
     this.selectedPlan = this.plans[planID];
   }
-  public updateSelectedPlan(id: number) {
+  public updatePlan(id: number) {
     this.communicationService.updatePlan(this.plans[id]).subscribe((res: any) => {
       this.refresh();
     });

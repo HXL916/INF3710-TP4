@@ -15,17 +15,19 @@
     </thead>
     <tbody>
       <tr *ngFor="let plan of plans; let i = index">
-        <td class="contentCell" contenteditable="false" >{{ plan.number}}</td>
-        <td class="contentCell" contenteditable="false" >{{ plan.category }}</td>
-        <td class="contentCell" contenteditable="false" >{{ plan.frequency }}</td>
-        <td class="contentCell" contenteditable="false" >{{ plan.persons }}</td>
-        <td class="contentCell" contenteditable="false" >{{ plan.calories }}</td>
-        <td class="contentCell" contenteditable="false" >{{ plan.price }}</td>
-        <td class="contentCell" contenteditable="false" >{{ plan.numberF }}</td>
+        <td class="contentCell"  >{{ plan.number}}</td>
+        <td class="contentCell"  >{{ plan.category }}</td>
+        <td class="contentCell"  >{{ plan.frequency }}</td>
+        <td class="contentCell"  >{{ plan.persons }}</td>
+        <td class="contentCell"  >{{ plan.calories }}</td>
+        <td class="contentCell"  >{{ plan.price }}</td>
+        <td class="contentCell"  >{{ plan.numberF }}</td>
       </tr>
-
-
     </tbody>
+
   </table>
+  <button class="btn" (click)="openDialogAjouter()"> Ajouter </button>
+  <button class="btn" (click)="openDialogModifier()"> Modifier </button>
+  <button class="btn" (click)="openDialogSupprimer()"> Supprimer </button>
 
 </div>

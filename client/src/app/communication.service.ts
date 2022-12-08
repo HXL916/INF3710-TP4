@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 // tslint:disable-next-line:ordered-imports
 import { of, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { PlanPK } from "../../../common/tables/HotelPK";
 
 import { Planrepas } from "../../../common/tables/Planrepas";
 
@@ -40,16 +39,10 @@ export class CommunicationService {
       .pipe(catchError(this.handleError<number>("updateHotel")));
   }
 
-  public deletePlan(planNB: string): Observable<number> {
+  public deletePlan(planNB: number): Observable<number> {
     return this.http
       .post<number>(this.BASE_URL + "/hotels/delete/" + planNB, {})
       .pipe(catchError(this.handleError<number>("deleteHotel")));
-  }
-
-  public getPlanPKs(): Observable<PlanPK[]> {
-    return this.http
-      .get<PlanPK[]>(this.BASE_URL + "/hotels/hotelNb")
-      .pipe(catchError(this.handleError<PlanPK[]>("getHotelPKs")));
   }
 
   private handleError<T>(

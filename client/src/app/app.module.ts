@@ -10,6 +10,9 @@ import { SupprimerComponent } from "./supprimer/supprimer.component";
 import { PlanrepasComponent } from "./planrepas/planrepas.component";
 import { AjouterComponent } from './ajouter/ajouter.component';
 import { ModifierComponent } from "./modifier/modifier.component";
+import { MatDialogModule } from "@angular/material/dialog";
+
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { ModifierComponent } from "./modifier/modifier.component";
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule
   ],
   providers: [CommunicationService],
   bootstrap: [AppComponent],

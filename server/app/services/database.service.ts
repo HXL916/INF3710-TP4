@@ -1,7 +1,6 @@
 import { injectable } from "inversify";
 import * as pg from "pg";
 import "reflect-metadata";
-import { Client } from "../../../common/tables/Client";
 import { Planrepas} from "../../../common/tables/Planrepas";
 
 
@@ -19,51 +18,32 @@ export class DatabaseService {
 
   public pool: pg.Pool = new pg.Pool(this.connectionConfig);
 
-  // ======= DEBUG =======
-  public async getAllFromTable(tableName: string): Promise<pg.QueryResult> {
-    const client = await this.pool.connect();
-    const res = await client.query(`SELECT * FROM public.${tableName};`);
-    client.release();
-    return res;
-  }
+  // ======= PLANREPAS =======
 
-  // ======= HOTEL =======
-  public async createHotel(plan: Planrepas): Promise<pg.QueryResult> {
-    const client2 = await this.pool.connect();
-    const res = await client2.query(`SELECT * FROM public.$};`);
-    client2.release();
-    return res;
-  }
-
-  public async getPlans(
-  ): Promise<pg.QueryResult> {
+  public async getPlans(): Promise<pg.QueryResult> {
     const Planrepas = await this.pool.connect();
-
     let queryText = "SELECT * FROM public.planrepas";
-
-
     const res = await Planrepas.query(queryText);
     Planrepas.release();
     return res;
   }
 
-  // get the hotel names and numbers so so that the user can only select an existing hotel
-  public async getHotelNamesByNos(): Promise<pg.QueryResult> {
+  public async createPlan(plan: Planrepas): Promise<pg.QueryResult> {
     const client = await this.pool.connect();
-    const res = await client.query("SELECT hotelNb, name FROM HOTELDB.Hotel;");
+    const res = await client.query(`SELECT * FROM public.$};`);
+    client.release();
+    return res;
+  }
+  
+  // modify any or all fields of a planrepas
+  public async updatePlan(): Promise<pg.QueryResult> {
+    const client = await this.pool.connect();
+    const res = await client.query(`SELECT * FROM public.$};`);
     client.release();
     return res;
   }
 
-  // modify name or city of a hotel
-  public async updateHotel(client: Client): Promise<pg.QueryResult> {
-    const client2 = await this.pool.connect();
-    const res = await client2.query(`SELECT * FROM public.$};`);
-    client2.release();
-    return res;
-  }
-
-  public async deleteHotel(hotelNb: string): Promise<pg.QueryResult> {
+  public async deletePlan(hotelNb: string): Promise<pg.QueryResult> {
     if (hotelNb.length === 0) throw new Error("Invalid delete query");
 
     const client = await this.pool.connect();

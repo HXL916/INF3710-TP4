@@ -7,3 +7,9 @@ export interface PlanrepasDB {
     prix: number;
     numérofournisseur: number;
 }
+
+export interface FournisseurDB {
+    numérofournisseur: number;
+    numéroplan: number;
+    adressefournisseur: string;
+}

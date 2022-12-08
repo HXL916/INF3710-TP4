@@ -15,13 +15,15 @@ export class AjouterComponent implements OnInit {
   @ViewChild("newCalories") newCalories: ElementRef;
   @ViewChild("newPrice") newPrice: ElementRef;
   @ViewChild("newVendorNumber") newVendorNumber: ElementRef;
-  
+
   public constructor(private communicationService: CommunicationService) {}
   public plans: Planrepas[] = [];
+  
   ngOnInit(): void {
   }
+
   public insertPlan(): void {
-    const plan: any = {
+    const plan: Planrepas = {
       number: this.newNumber.nativeElement.innerText,
       category: this.newCategory.nativeElement.innerText,
       frequency: this.newFrequency.nativeElement.innerText,
@@ -33,12 +35,12 @@ export class AjouterComponent implements OnInit {
 
     this.communicationService.insertPlan(plan).subscribe((res: number) => {
       if (res > 0) {
-        this.communicationService.filter("update");
+        this.communicationService.filter("insert");
       }
       this.refresh();
     });
   }
-  
+
   private refresh() {
     this.newNumber.nativeElement.innerText = "";
     this.newCategory.nativeElement.innerText = "";

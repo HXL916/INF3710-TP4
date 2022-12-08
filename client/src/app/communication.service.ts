@@ -23,26 +23,26 @@ export class CommunicationService {
 
   public getPlans(): Observable<Planrepas[]> {
     return this.http
-      .get<Planrepas[]>(this.BASE_URL + "/hotels")
-      .pipe(catchError(this.handleError<Planrepas[]>("getHotels")));
+      .get<Planrepas[]>(this.BASE_URL + "/plans")
+      .pipe(catchError(this.handleError<Planrepas[]>("getPlans")));
   }
 
   public insertPlan(plan: Planrepas): Observable<number> {
     return this.http
       .post<number>(this.BASE_URL + "/hotels/insert", plan)
-      .pipe(catchError(this.handleError<number>("insertHotel")));
+      .pipe(catchError(this.handleError<number>("insertPlan")));
   }
 
   public updatePlan(plan: Planrepas): Observable<number> {
     return this.http
       .put<number>(this.BASE_URL + "/hotels/update", plan)
-      .pipe(catchError(this.handleError<number>("updateHotel")));
+      .pipe(catchError(this.handleError<number>("updatePlan")));
   }
 
   public deletePlan(planNB: number): Observable<number> {
     return this.http
       .post<number>(this.BASE_URL + "/hotels/delete/" + planNB, {})
-      .pipe(catchError(this.handleError<number>("deleteHotel")));
+      .pipe(catchError(this.handleError<number>("deletePlan")));
   }
 
   private handleError<T>(

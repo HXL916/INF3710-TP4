@@ -6,16 +6,18 @@ import { BrowserModule } from "@angular/platform-browser";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { CommunicationService } from "./communication.service";
-import { GuestComponent } from "./guest/guest.component";
+import { SupprimerComponent } from "./supprimer/supprimer.component";
 import { PlanrepasComponent } from "./planrepas/planrepas.component";
-import { RoomComponent } from "./room/room.component";
+import { AjouterComponent } from './ajouter/ajouter.component';
+import { ModifierComponent } from "./modifier/modifier.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    RoomComponent,
     PlanrepasComponent,
-    GuestComponent,
+    ModifierComponent,
+    SupprimerComponent,
+    AjouterComponent,
   ],
   imports: [
     CommonModule,

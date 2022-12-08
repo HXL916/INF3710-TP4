@@ -1,4 +1,4 @@
-export interface HotelPK {
-  hotelnb: string;
+export interface PlanPK {
+  planNB: string;
   name: string;
 }

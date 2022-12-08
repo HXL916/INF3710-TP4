@@ -1,0 +1,43 @@
+<div id="planrepas">
+    <h1>Ajouter un plan</h1>
+  
+    <div class="divider"></div>
+  
+    <table id="ht" align="center" border="1" width="1000" class="table-striped table-hover">
+      <thead class="header">
+        <th class="contentCell">numéro planrepas</th>
+        <th class="contentCell">catégorie</th>
+        <th class="contentCell">fréquence</th>
+        <th class="contentCell">nombre de personnes</th>
+        <th class="contentCell">calories</th>
+        <th class="contentCell">prix</th>
+        <th class="contentCell">numéro fournisseur</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let plan of plans; let i = index">
+          <td class="contentCell" contenteditable="true" >{{ plan.number}}</td>
+          <td class="contentCell" contenteditable="true" >{{ plan.category }}</td>
+          <td class="contentCell" contenteditable="true" >{{ plan.frequency }}</td>
+          <td class="contentCell" contenteditable="true" >{{ plan.persons }}</td>
+          <td class="contentCell" contenteditable="true" >{{ plan.calories }}</td>
+          <td class="contentCell" contenteditable="true" >{{ plan.price }}</td>
+          <td class="contentCell" contenteditable="true" >{{ plan.numberF }}</td>
+        </tr>
+  
+        <tr class="blank_row">
+          <td class="contentCell" contenteditable="true" placeholder="New Number" #newHotelNb></td>
+          <td class="contentCell" contenteditable="true" placeholder="1" #newHotelName></td>
+          <td class="contentCell" contenteditable="true" placeholder="1" #newHotelCity></td>
+          <td class="contentCell" contenteditable="true" placeholder="1" #newHotelNb></td>
+          <td class="contentCell" contenteditable="true" placeholder="(joules)" #newHotelName></td>
+          <td class="contentCell" contenteditable="true" placeholder="($)" #newHotelCity></td>
+          <td class="contentCell" contenteditable="true" placeholder="New Number" #newHotelNb></td>
+          <td class="contentCell"></td>
+      </tr>
+      <button type="button" class="btn" >+</button>
+  
+      </tbody>
+    </table>
+  
+  </div>
+  

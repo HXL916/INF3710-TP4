@@ -17,27 +17,14 @@ export class PlanrepasComponent {
   public constructor(private communicationService: CommunicationService) {}
 
   public ngOnInit(): void {
-    this.getHotels();
+    this.getPlans();
   }
 
-  public getHotels(): void {
+  public getPlans(): void {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
       console.log(plans);
     });
   }
 
-
-  private refresh() {
-    this.getHotels();
-    this.newHotelNb.nativeElement.innerText = "";
-    this.newHotelName.nativeElement.innerText = "";
-    this.newHotelCity.nativeElement.innerText = "";
-  }
-
-  public updateHotel(i: number) {
-    this.communicationService.updatePlan(this.plans[i]).subscribe((res: any) => {
-      this.refresh();
-    });
-  }
 }

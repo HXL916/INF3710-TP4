@@ -1,5 +1,5 @@
 <div id="planrepas">
-  <h1>Clients</h1>
+  <h1>Planrepas</h1>
 
   <div class="divider"></div>
 
@@ -12,25 +12,18 @@
       <th class="contentCell">calories</th>
       <th class="contentCell">prix</th>
       <th class="contentCell">numéro fournisseur</th>
-      <th class="actionCell">ACTION</th>
     </thead>
     <tbody>
       <tr *ngFor="let plan of plans; let i = index">
-        <td class="contentCell" contenteditable="true" (blur)="changeHotelName($event, i)">{{ plan.number}}</td>
-        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.category }}</td>
-        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.frequency }}</td>
-        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.persons }}</td>
-        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.calories }}</td>
-        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.price }}</td>
-        <td class="contentCell" contenteditable="true" (blur)="changeHotelCity($event, i)">{{ plan.numberF }}</td>
+        <td class="contentCell" contenteditable="true" >{{ plan.number}}</td>
+        <td class="contentCell" contenteditable="true" >{{ plan.category }}</td>
+        <td class="contentCell" contenteditable="true" >{{ plan.frequency }}</td>
+        <td class="contentCell" contenteditable="true" >{{ plan.persons }}</td>
+        <td class="contentCell" contenteditable="true" >{{ plan.calories }}</td>
+        <td class="contentCell" contenteditable="true" >{{ plan.price }}</td>
+        <td class="contentCell" contenteditable="true" >{{ plan.numberF }}</td>
       </tr>
 
-      <tr class="blank_row">
-        <td class="contentCell" contenteditable="true" placeholder="New Number" #newHotelNb></td>
-        <td class="contentCell" contenteditable="true" placeholder="New Name" #newHotelName></td>
-        <td class="contentCell" contenteditable="true" placeholder="New City" #newHotelCity></td>
-        <td class="contentCell"></td>
-    </tr>
 
     </tbody>
   </table>

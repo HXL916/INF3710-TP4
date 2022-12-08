@@ -2,14 +2,14 @@ import { NextFunction, Request, Response, Router } from "express";
 import { inject, injectable } from "inversify";
 import * as pg from "pg";
 
-import { Client } from "../../../common/tables/Hotel";
-import {ClientDB} from "../../../common/tables/DataBaseClasses";
+import {PlanrepasDB} from "../../../common/tables/DataBaseClasses";
 import { HotelPK } from "../../../common/tables/HotelPK";
 import { Room } from "../../../common/tables/Room";
 import { Guest } from "../../../common/tables/Guest";
 
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";
+import { Planrepas } from "../../../common/tables/Planrepas";
 
 @injectable()
 export class DatabaseController {
@@ -23,27 +23,23 @@ export class DatabaseController {
     // ======= HOTEL ROUTES =======
     // ex http://localhost:3000/database/hotel?hotelNb=3&name=LeGrandHotel&city=laval
     router.get("/hotels", (req: Request, res: Response, _: NextFunction) => {
-      var hotelNb = req.params.hotelNb ? req.params.hotelNb : "";
-      var hotelName = req.params.name ? req.params.name : "";
-      var hotelCity = req.params.city ? req.params.city : "";
-      console.log(hotelNb);
       this.databaseService
-        .filterHotels(hotelNb, hotelName, hotelCity)
+        .getPlans()
         .then((result: pg.QueryResult) => {
-          const clients: Client[] = [];
-          result.rows.forEach((client: ClientDB) => {
-            clients.push({
-              number: client.numéroclient,
-              surname: client.prénomclient,
-              name: client.nomclient,
-              adresse: client.adressecourrielclient,
-              street: client.rueclient,
-              city: client.villeclient,
-              postcode: client.codepostalclient,
+          const Plans: Planrepas[] = [];
+          result.rows.forEach((plan: PlanrepasDB) => {
+            Plans.push({
+              number: plan.numéroplan,
+              category: plan.catégorie,
+              frequency: plan.fréquence,
+              persons: plan.nbrpersonnes,
+              calories: plan.nbrcalories,
+              price: plan.prix,
+              numberF: plan.numérofournisseur,
             });
             
           });
-          res.json(clients);
+          res.json(Plans);
         })
         .catch((e: Error) => {
           console.error(e.stack);
@@ -69,29 +65,6 @@ export class DatabaseController {
       }
     );
 
-    router.post(
-      "/hotels/insert",
-      (req: Request, res: Response, _: NextFunction) => {
-        const client: Client = {
-          number: req.body.number,
-          name: req.body.name,
-          city: req.body.city,
-          surname: req.body.surname,
-          street: req.body.street,
-          postcode: req.body.postcode,
-          adresse: req.body.adresse,
-        };
-        this.databaseService
-          .createHotel(client)
-          .then((result: pg.QueryResult) => {
-            res.json(result.rowCount);
-          })
-          .catch((e: Error) => {
-            console.error(e.stack);
-            res.json(-1);
-          });
-      }
-    );
 
     router.post(
       "/hotels/delete/:hotelNb",

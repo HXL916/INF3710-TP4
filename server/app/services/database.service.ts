@@ -3,6 +3,7 @@ import * as pg from "pg";
 import "reflect-metadata";
 import { Room } from "../../../common/tables/Room";
 import { Client } from "../../../common/tables/Hotel";
+import { Planrepas} from "../../../common/tables/Planrepas";
 import { Gender, Guest } from "../../../common/tables/Guest";
 
 @injectable()
@@ -28,7 +29,7 @@ export class DatabaseService {
   }
 
   // ======= HOTEL =======
-  public async createHotel(client: Client): Promise<pg.QueryResult> {
+  public async createHotel(plan: Planrepas): Promise<pg.QueryResult> {
     const client2 = await this.pool.connect();
     const res = await client2.query(`SELECT * FROM public.$};`);
     client2.release();
@@ -36,18 +37,15 @@ export class DatabaseService {
   }
 
   // get hotels that correspond to certain caracteristics
-  public async filterHotels(
-    hotelNb: string,
-    hotelName: string,
-    city: string
+  public async getPlans(
   ): Promise<pg.QueryResult> {
-    const client = await this.pool.connect();
+    const Planrepas = await this.pool.connect();
 
-    let queryText = "SELECT * FROM public.client";
+    let queryText = "SELECT * FROM public.planrepas";
 
 
-    const res = await client.query(queryText);
-    client.release();
+    const res = await Planrepas.query(queryText);
+    Planrepas.release();
     return res;
   }
 

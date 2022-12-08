@@ -7,6 +7,7 @@ import { Client } from "../../../common/tables/Hotel";
 import { Room } from "../../../common/tables/Room";
 import { HotelPK } from "../../../common/tables/HotelPK";
 import { Guest } from "../../../common/tables/Guest";
+import { Planrepas } from "../../../common/tables/Planrepas";
 
 @Injectable()
 export class CommunicationService {
@@ -23,10 +24,10 @@ export class CommunicationService {
     this._listners.next(filterBy);
   }
 
-  public getHotels(): Observable<Client[]> {
+  public getPlans(): Observable<Planrepas[]> {
     return this.http
-      .get<Client[]>(this.BASE_URL + "/hotels")
-      .pipe(catchError(this.handleError<Client[]>("getHotels")));
+      .get<Planrepas[]>(this.BASE_URL + "/hotels")
+      .pipe(catchError(this.handleError<Planrepas[]>("getHotels")));
   }
 
   public insertHotel(hotel: Client): Observable<number> {
@@ -35,9 +36,9 @@ export class CommunicationService {
       .pipe(catchError(this.handleError<number>("insertHotel")));
   }
 
-  public updateHotel(client: Client): Observable<number> {
+  public updatePlan(plan: Planrepas): Observable<number> {
     return this.http
-      .put<number>(this.BASE_URL + "/hotels/update", client)
+      .put<number>(this.BASE_URL + "/hotels/update", plan)
       .pipe(catchError(this.handleError<number>("updateHotel")));
   }
 

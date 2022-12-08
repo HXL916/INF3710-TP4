@@ -1,7 +1,7 @@
 import { injectable } from "inversify";
 import * as pg from "pg";
 import "reflect-metadata";
-import { Planrepas} from "../../../common/tables/Planrepas";
+import { PlanrepasDB } from "../../../common/tables/DataBaseClasses";
 
 
 @injectable()
@@ -28,13 +28,28 @@ export class DatabaseService {
     return res;
   }
 
-  public async createPlan(plan: Planrepas): Promise<pg.QueryResult> {
+  public async createPlan(plan: PlanrepasDB): Promise<pg.QueryResult> {
     const client = await this.pool.connect();
-    const res = await client.query(`SELECT * FROM public.$};`);
+    if (!plan.numéroplan || !plan.numérofournisseur) {
+      throw new Error("Impossible d'ajouter le planrepas désiré.");
+    }
+
+    const values: string[] = [
+      plan.numéroplan.toString(),
+      plan.catégorie,
+      plan.fréquence.toString(), 
+      plan.nbrpersonnes.toString(),
+      plan.nbrcalories.toString(),
+      plan.prix.toString(),
+      plan.numérofournisseur.toString()
+    ];
+    const queryText: string = `INSERT INTO public.planrepas VALUES($1,$2,$3,$4,$5,$6,$7);`;
+
+    const res = await client.query(queryText, values);
     client.release();
     return res;
   }
-  
+
   // modify any or all fields of a planrepas
   public async updatePlan(): Promise<pg.QueryResult> {
     const client = await this.pool.connect();

@@ -1,6 +1,6 @@
 export interface PlanrepasDB {
     numéroplan: number;
-    catégorie: number;
+    catégorie: string;
     fréquence: number;
     nbrpersonnes: number;
     nbrcalories: number;

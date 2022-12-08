@@ -40,24 +40,27 @@ export class DatabaseController {
         });
     });
 
-    // router.get(
-    //   "/hotels/hotelNb",
-    //   (req: Request, res: Response, _: NextFunction) => {
-    //     this.databaseService
-    //       .getHotelNamesByNos()
-    //       .then((result: pg.QueryResult) => {
-    //         const hotelsNbsNames = result.rows.map((hotel: PlanPK) => ({
+    router.post('/planrepas', (req: Request, res: Response, next: NextFunction) => {
+      const planDB: PlanrepasDB = {
+        numéroplan: req.body.number,
+        catégorie: req.body.category,
+        fréquence: req.body.frequency,
+        nbrpersonnes: req.body.persons,
+        nbrcalories: req.body.calories,
+        prix: req.body.price,
+        numérofournisseur: req.body.numberF
+      };
 
-    //         }));
-    //         res.json(hotelsNbsNames);
-    //       })
-
-    //       .catch((e: Error) => {
-    //         console.error(e.stack);
-    //       });
-    //   }
-    // );
-
+      this.databaseService
+        .createPlan(planDB)
+        .then((result: pg.QueryResult) => {
+          res.json(result.rowCount);
+        })
+        .catch((e: Error) => {
+          console.error(e.stack);
+          res.json(-1);
+        });
+    });
 
     // router.post("/hotels/delete/:hotelNb",(req: Request, res: Response, _: NextFunction) => {
     //     const hotelNb: string = req.params.hotelNb;

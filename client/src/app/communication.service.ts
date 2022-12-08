@@ -29,19 +29,19 @@ export class CommunicationService {
 
   public insertPlan(plan: Planrepas): Observable<number> {
     return this.http
-      .post<number>(this.BASE_URL + "/hotels/insert", plan)
+      .post<number>(this.BASE_URL + "/planrepas", plan)
       .pipe(catchError(this.handleError<number>("insertPlan")));
   }
 
   public updatePlan(plan: Planrepas): Observable<number> {
     return this.http
-      .put<number>(this.BASE_URL + "/hotels/update", plan)
+      .put<number>(this.BASE_URL + "/planrepas", plan)
       .pipe(catchError(this.handleError<number>("updatePlan")));
   }
 
   public deletePlan(planNB: number): Observable<number> {
     return this.http
-      .post<number>(this.BASE_URL + "/hotels/delete/" + planNB, {})
+      .post<number>(this.BASE_URL + "/planrepas" + planNB, {})
       .pipe(catchError(this.handleError<number>("deletePlan")));
   }
 

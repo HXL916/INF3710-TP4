@@ -17,7 +17,12 @@ export class AjouterComponent implements OnInit {
   @ViewChild("newPrice") newPrice: ElementRef;
   @ViewChild("newVendorNumber") newVendorNumber: ElementRef;
 
-  public constructor(private communicationService: CommunicationService, public matDialogRefAjouter: MatDialogRef<AjouterComponent>) {}
+  public constructor(
+    private communicationService: CommunicationService,
+    private matDialogRefAjouter: MatDialogRef<AjouterComponent>,
+    )
+    {}
+
   public plans: Planrepas[] = [];
 
   ngOnInit(): void {

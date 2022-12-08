@@ -1,6 +1,6 @@
 export interface Planrepas {
     number: number;
-    category: number;
+    category: string;
     frequency: number;
     persons: number;
     calories: number;

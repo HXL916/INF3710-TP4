@@ -8,9 +8,9 @@ import { PlanrepasDB } from "../../../common/tables/DataBaseClasses";
 export class DatabaseService {
   // TODO: A MODIFIER POUR VOTRE BD
   public connectionConfig: pg.ConnectionConfig = {
-    user: "postgres",
+    user: "user",
     database: "TP4_Livraison",
-    password: "d2Xvq5-f*L3V",
+    password: "1",
     port: 5432,
     host: "127.0.0.1",
     keepAlive: true,
@@ -28,6 +28,13 @@ export class DatabaseService {
     return res;
   }
 
+  public async getVendors(): Promise<pg.QueryResult> {
+    const vendor = await this.pool.connect();
+    let queryText = "SELECT * FROM public.fournisseur";
+    const res = await vendor.query(queryText);
+    vendor.release();
+    return res;
+  }
   public async createPlan(plan: PlanrepasDB): Promise<pg.QueryResult> {
     const client = await this.pool.connect();
     if (!plan.numéroplan || !plan.numérofournisseur) {

@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Planrepas } from "../../../../common/tables/Planrepas";
+import { Fournisseur, Planrepas } from "../../../../common/tables/Planrepas";
 import { CommunicationService } from "../communication.service";
 
 @Component({
@@ -20,10 +20,13 @@ export class ModifierComponent implements OnInit {
   public plans: Planrepas[] = [];
   public selectedPlan: Planrepas;
   public oldNumeroPlan: string;
+  public vendors: Fournisseur[] = [];
+  public selectedVendor:Fournisseur;
   public constructor(private communicationService: CommunicationService, public matDialogRefModifier: MatDialogRef<ModifierComponent>) {}
 
   public ngOnInit(): void {
     this.getPlans();
+    this.getVendors();
   }
 
   public getPlans(): void {
@@ -35,7 +38,17 @@ export class ModifierComponent implements OnInit {
   }
   public updateSelected(planID: any) {
     this.selectedPlan = this.plans[planID];
+    this.selectedVendor.number = this.selectedPlan.numberF;
     this.oldNumeroPlan = this.plans[planID].number.toString();
+  }
+  public getVendors(): void {
+    this.communicationService.getVendors().subscribe((vendors: Fournisseur[]) => {
+      this.selectedVendor = vendors[0];
+      this.vendors = vendors;
+    });
+  }
+  public updateSelectedVendor(ID: any) {
+    this.selectedVendor = this.vendors[ID];
   }
   public updatePlan() {
     const plan: Planrepas = {
@@ -47,7 +60,6 @@ export class ModifierComponent implements OnInit {
       price: this.newPrice.nativeElement.innerText,
       numberF: this.newVendorNumber.nativeElement.innerText,
     };
-    console.log(plan);
     this.communicationService.updatePlan(plan, this.oldNumeroPlan).subscribe((res: any) => {
       this.refresh();
     });

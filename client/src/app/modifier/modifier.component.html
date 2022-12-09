@@ -34,7 +34,11 @@
         <td class="contentCell" contenteditable="true" #newPersons>{{ selectedPlan.persons }}</td>
         <td class="contentCell" contenteditable="true" #newCalories>{{ selectedPlan.calories }}</td>
         <td class="contentCell" contenteditable="true" #newPrice>{{ selectedPlan.price }}</td>
-        <td class="contentCell" contenteditable="true" #newVendorNumber>{{ selectedPlan.numberF }}</td>
+        <td class="contentCell" contenteditable="false" #newVendorNumber>
+          <select class="custom-select" id="hotelSelect" (change)="updateSelectedVendor($event.target.options.selectedIndex)">
+            <option *ngFor="let vendor of vendors">{{ vendor.number }}</option>
+          </select>
+        </td>
       </tr>
     </tbody>
     <button type="button" class="btn" (click)="updatePlan()" >Update</button>

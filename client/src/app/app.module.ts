@@ -12,6 +12,7 @@ import { AjouterComponent } from './ajouter/ajouter.component';
 import { ModifierComponent } from "./modifier/modifier.component";
 import { MatDialogModule } from "@angular/material/dialog";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 
 
@@ -22,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ModifierComponent,
     SupprimerComponent,
     AjouterComponent,
+    ErrorMessageComponent,
   ],
   imports: [
     CommonModule,

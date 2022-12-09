@@ -18,10 +18,3 @@ Tutoriel du projet d'INF3710
 - Allez dans `/server` et faites `npm start`​
 
 - Allez dans `/client` et faites `npm start`​
-
-## Demo Screenshots (remove for actual readme)
-
-![Main Page](./imgs/mainpage.PNG "Welcome Page")
-![Hotels Page](./imgs/hotels.PNG "Hotels Page")
-![Rooms Page](./imgs/rooms.PNG "Rooms Page")
-![Guests Page](./imgs/guests.PNG "Guests Page")

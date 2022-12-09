@@ -33,13 +33,26 @@ export class ModifierComponent implements OnInit {
   public getPlans(): void {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
+      this.plans.sort( (a, b) => { return a.number - b.number;});
       this.selectedPlan = plans[0];
     });
   }
   public updateSelected(planID: any) {
     this.selectedPlan = this.plans[planID];
-    this.selectedVendor.number = this.selectedPlan.numberF;
+    
     this.oldNumeroPlan = this.plans[planID].number.toString();
+    this.updateVendorList();
+  }
+  public updateVendorList(): void{
+    this.vendors.forEach((vendor,index)=>{
+      if(vendor.number==this.selectedPlan.numberF){
+        var select = document.getElementById("mySelect");
+        // @ts-ignore
+        select.options[index].selected = true;
+        this.selectedVendor = this.vendors[index];
+      }
+
+    })
   }
   public getVendors(): void {
     this.communicationService.getVendors().subscribe((vendors: Fournisseur[]) => {
@@ -58,7 +71,7 @@ export class ModifierComponent implements OnInit {
       persons: this.newPersons.nativeElement.innerText,
       calories: this.newCalories.nativeElement.innerText,
       price: this.newPrice.nativeElement.innerText,
-      numberF: this.newVendorNumber.nativeElement.innerText,
+      numberF: this.selectedPlan.numberF
     };
     let request :boolean = true;
     request = !this.verifyInput(plan);
@@ -97,7 +110,7 @@ export class ModifierComponent implements OnInit {
     if(!this.containsOnlyNumbers(plan.price))
     errorMessage += "Prix du plan fourni ne s'agit pas d'un type number \n"
 
-    if(errorMessage != "Impossible d'ajouter le plan, les types d'entrées sont erronés: \n")
+    if(errorMessage != "Impossible de modifier le plan: \n")
       errorHappen = true;
     if(errorHappen)
       this.openErrorMessage(errorMessage);
@@ -105,7 +118,7 @@ export class ModifierComponent implements OnInit {
   }
   private verifyDuplicateID(planToTest: Planrepas) :boolean{
     for(const plan of this.plans){
-      if(plan.number == planToTest.number)
+      if(plan.number == planToTest.number && plan.number != this.selectedPlan.number)
         return true;
     }
 

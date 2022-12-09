@@ -36,6 +36,7 @@ export class AjouterComponent implements OnInit {
   public getPlans(): void {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
+      this.plans.sort( (a, b) => { return a.number - b.number;});
     });
   }
   public getVendors(): void {
@@ -57,9 +58,7 @@ export class AjouterComponent implements OnInit {
       price: this.newPrice.nativeElement.innerText,
       numberF: this.selectedVendor.number
     };
-    let request :boolean = true;
     
-
     if(this.newNumber.nativeElement.innerText == "")
       plan.number = 211;
     if(this.newCategory.nativeElement.innerText == "")
@@ -74,7 +73,8 @@ export class AjouterComponent implements OnInit {
       plan.price = 20;
     if(this.newVendorNumber.nativeElement.innerText == "")
       plan.numberF = 111111;
-
+      
+    let request :boolean = true;
     request = !this.verifyInput(plan);
 
     if(request){
@@ -84,9 +84,6 @@ export class AjouterComponent implements OnInit {
       }
       this.refresh();
     });
-  }
-  else{
-
   }
   }
 
@@ -124,7 +121,7 @@ export class AjouterComponent implements OnInit {
     if(!this.containsOnlyNumbers(plan.price))
     errorMessage += "Prix du plan fourni ne s'agit pas d'un type number \n"
 
-    if(errorMessage != "Impossible d'ajouter le plan, les types d'entrées sont erronés: \n")
+    if(errorMessage != "Impossible d'ajouter le plan: \n")
       errorHappen = true;
     if(errorHappen)
       this.openErrorMessage(errorMessage);

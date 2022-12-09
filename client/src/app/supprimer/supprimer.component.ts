@@ -20,8 +20,8 @@ export class SupprimerComponent implements OnInit {
   public getPlans(): void {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
+      this.plans.sort( (a, b) => { return a.number - b.number;});
       this.selectedPlan = plans[0];
-      console.log(plans);
     });
   }
 

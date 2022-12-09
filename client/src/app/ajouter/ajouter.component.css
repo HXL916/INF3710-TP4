@@ -42,13 +42,15 @@
 }
 
 .closeButton {
-  background-color: transparent;
-  position: fixed;
-  top: 23%;
-  right: 17%;
-  margin-bottom: 0%;
-  color: black;
-}
+    background-color: transparent;
+    position: fixed;
+    border-style: none;
+    background-color: #d6d6d6;
+    top: 23%;
+    right: 17%;
+    margin-bottom: 0%;
+    color: black;
+  }
 
 .closeButton:hover {
   color: var(--theme-purple);

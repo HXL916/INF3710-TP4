@@ -2,6 +2,7 @@
     background-color: var(--theme-background);
     font-family: 'Roboto', sans-serif;
     text-align: center;
+    min-width: 700px;
     padding: 3%;
 }
 
@@ -38,6 +39,8 @@
 .closeButton {
   background-color: transparent;
   position: fixed;
+  border-style: none;
+  background-color: #d6d6d6;
   top: 23%;
   right: 17%;
   margin-bottom: 0%;

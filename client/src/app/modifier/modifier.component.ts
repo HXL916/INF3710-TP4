@@ -47,6 +47,7 @@ export class ModifierComponent implements OnInit {
       price: this.newPrice.nativeElement.innerText,
       numberF: this.newVendorNumber.nativeElement.innerText,
     };
+    console.log(plan);
     this.communicationService.updatePlan(plan, this.oldNumeroPlan).subscribe((res: any) => {
       this.refresh();
     });

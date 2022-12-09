@@ -19,6 +19,7 @@ export class AjouterComponent implements OnInit {
   @ViewChild("newVendorNumber") newVendorNumber: ElementRef;
   public vendors: Fournisseur[] = [];
   public selectedVendor:Fournisseur;
+  public plans: Planrepas[] = [];
 
   public constructor(
     private communicationService: CommunicationService,
@@ -29,8 +30,14 @@ export class AjouterComponent implements OnInit {
 
   ngOnInit(): void {
     this.getVendors();
+    this.getPlans();
   }
 
+  public getPlans(): void {
+    this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
+      this.plans = plans;
+    });
+  }
   public getVendors(): void {
     this.communicationService.getVendors().subscribe((vendors: Fournisseur[]) => {
       this.selectedVendor = vendors[0];
@@ -68,7 +75,7 @@ export class AjouterComponent implements OnInit {
     if(this.newVendorNumber.nativeElement.innerText == "")
       plan.numberF = 111111;
 
-    request = !this.verifyInputType(plan);
+    request = !this.verifyInput(plan);
 
     if(request){
     this.communicationService.insertPlan(plan).subscribe((res: number) => {
@@ -100,9 +107,12 @@ export class AjouterComponent implements OnInit {
   private containsOnlyNumbers(value: any) {
     return /^[0-9]+$/.test(value);
   }
-  private verifyInputType(plan: Planrepas) :boolean{
-    let errorMessage : string = "Impossible d'ajouter le plan, les types d'entrées sont erronés: \n";
+  private verifyInput(plan: Planrepas) :boolean{
+    let errorMessage : string = "Impossible d'ajouter le plan: \n";
     let errorHappen: boolean = false;
+    if(this.verifyDuplicateID(plan))
+    errorMessage += "Numéro de plan déjà exister \n"
+
     if(!this.containsOnlyNumbers(plan.number))
     errorMessage += "Numéro du plan fourni ne s'agit pas d'un type number \n"
     if(!this.containsOnlyNumbers(plan.frequency))
@@ -119,6 +129,14 @@ export class AjouterComponent implements OnInit {
     if(errorHappen)
       this.openErrorMessage(errorMessage);
     return errorHappen;
+  }
+  private verifyDuplicateID(planToTest: Planrepas) :boolean{
+    for(const plan of this.plans){
+      if(plan.number == planToTest.number)
+        return true;
+    }
+
+    return false;
   }
   private openErrorMessage(errorMessage: string){
     this.dialog.open(ErrorMessageComponent, {

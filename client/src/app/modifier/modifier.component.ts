@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Fournisseur, Planrepas } from "../../../../common/tables/Planrepas";
 import { CommunicationService } from "../communication.service";
+import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 @Component({
   selector: "app-room",
@@ -22,7 +23,7 @@ export class ModifierComponent implements OnInit {
   public oldNumeroPlan: string;
   public vendors: Fournisseur[] = [];
   public selectedVendor:Fournisseur;
-  public constructor(private communicationService: CommunicationService, public matDialogRefModifier: MatDialogRef<ModifierComponent>) {}
+  public constructor(private communicationService: CommunicationService, public matDialogRefModifier: MatDialogRef<ModifierComponent>,public dialog: MatDialog,) {}
 
   public ngOnInit(): void {
     this.getPlans();
@@ -33,7 +34,6 @@ export class ModifierComponent implements OnInit {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
       this.selectedPlan = plans[0];
-      console.log(plans);
     });
   }
   public updateSelected(planID: any) {
@@ -60,9 +60,15 @@ export class ModifierComponent implements OnInit {
       price: this.newPrice.nativeElement.innerText,
       numberF: this.newVendorNumber.nativeElement.innerText,
     };
-    this.communicationService.updatePlan(plan, this.oldNumeroPlan).subscribe((res: any) => {
-      this.refresh();
-    });
+    let request :boolean = true;
+    request = !this.verifyInput(plan);
+
+    if(request){
+      this.communicationService.updatePlan(plan, this.oldNumeroPlan).subscribe((res: any) => {
+        this.refresh();
+      });
+  }
+
   }
   private refresh() {
     this.getPlans();
@@ -70,6 +76,48 @@ export class ModifierComponent implements OnInit {
 
   public closeModale() {
     this.matDialogRefModifier.close();
+  }
+  private containsOnlyNumbers(value: any) {
+    return /^[0-9]+$/.test(value);
+  }
+  private verifyInput(plan: Planrepas) :boolean{
+    let errorMessage : string = "Impossible de modifier le plan: \n";
+    let errorHappen: boolean = false;
+    if(this.verifyDuplicateID(plan))
+    errorMessage += "Numéro de plan déjà exister \n"
+
+    if(!this.containsOnlyNumbers(plan.number))
+    errorMessage += "Numéro du plan fourni ne s'agit pas d'un type number \n"
+    if(!this.containsOnlyNumbers(plan.frequency))
+    errorMessage += "Fréquence du plan fourni ne s'agit pas d'un type number \n"
+    if(!this.containsOnlyNumbers(plan.persons))
+    errorMessage += "nombre de personnes du plan fourni ne s'agit pas d'un type number \n"
+    if(!this.containsOnlyNumbers(plan.calories))
+    errorMessage += "Calories du plan fourni ne s'agit pas d'un type number \n"
+    if(!this.containsOnlyNumbers(plan.price))
+    errorMessage += "Prix du plan fourni ne s'agit pas d'un type number \n"
+
+    if(errorMessage != "Impossible d'ajouter le plan, les types d'entrées sont erronés: \n")
+      errorHappen = true;
+    if(errorHappen)
+      this.openErrorMessage(errorMessage);
+    return errorHappen;
+  }
+  private verifyDuplicateID(planToTest: Planrepas) :boolean{
+    for(const plan of this.plans){
+      if(plan.number == planToTest.number)
+        return true;
+    }
+
+    return false;
+  }
+  private openErrorMessage(errorMessage: string){
+    this.dialog.open(ErrorMessageComponent, {
+      hasBackdrop :true,
+      data: errorMessage,
+      width: '30%',
+      height: '30%',
+    });
   }
 }
 

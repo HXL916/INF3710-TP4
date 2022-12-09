@@ -38,7 +38,20 @@ export class AjouterComponent implements OnInit {
       price: this.newPrice.nativeElement.innerText,
       numberF: this.newVendorNumber.nativeElement.innerText,
     };
-
+    if(this.newNumber.nativeElement.innerText == "")
+      plan.number = 211;
+    if(this.newCategory.nativeElement.innerText == "")
+      plan.category = "categorie 1";
+    if(this.newFrequency.nativeElement.innerText == "")
+      plan.frequency = 1;
+    if(this.newPersons.nativeElement.innerText == "")
+      plan.persons = 1;
+    if(this.newCalories.nativeElement.innerText == "")
+      plan.calories = 200;
+    if(this.newPrice.nativeElement.innerText == "")
+      plan.price = 20;
+    if(this.newVendorNumber.nativeElement.innerText == "")
+      plan.numberF = 111111;
     this.communicationService.insertPlan(plan).subscribe((res: number) => {
       if (res > 0) {
         this.communicationService.filter("insert");

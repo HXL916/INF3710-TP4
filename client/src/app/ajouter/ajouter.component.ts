@@ -83,6 +83,7 @@ export class AjouterComponent implements OnInit {
         this.communicationService.filter("insert");
       }
       this.refresh();
+      this.closeModale();
     });
   }
   }
@@ -94,7 +95,6 @@ export class AjouterComponent implements OnInit {
     this.newPersons.nativeElement.innerText = "";
     this.newCalories.nativeElement.innerText = "";
     this.newPrice.nativeElement.innerText = "";
-    this.newVendorNumber.nativeElement.innerText = "";
   }
 
   public closeModale() {

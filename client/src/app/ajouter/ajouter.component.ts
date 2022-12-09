@@ -19,7 +19,7 @@ export class AjouterComponent implements OnInit {
   public vendors: Fournisseur[] = [];
   public selectedVendor:Fournisseur;
   public plans: Planrepas[] = [];
-  
+
   public constructor(
     private communicationService: CommunicationService,
     private matDialogRefAjouter: MatDialogRef<AjouterComponent>,
@@ -32,6 +32,7 @@ export class AjouterComponent implements OnInit {
 
   public getVendors(): void {
     this.communicationService.getVendors().subscribe((vendors: Fournisseur[]) => {
+      this.selectedVendor = vendors[0];
       this.vendors = vendors;
     });
   }
@@ -46,7 +47,7 @@ export class AjouterComponent implements OnInit {
       persons: this.newPersons.nativeElement.innerText,
       calories: this.newCalories.nativeElement.innerText,
       price: this.newPrice.nativeElement.innerText,
-      numberF: this.newVendorNumber.nativeElement.innerText,
+      numberF: this.selectedVendor.number
     };
     if(this.newNumber.nativeElement.innerText == "")
       plan.number = 211;

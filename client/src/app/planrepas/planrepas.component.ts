@@ -24,7 +24,6 @@ export class PlanrepasComponent {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
       this.plans.sort( (a, b) => { return a.number - b.number;});
-      console.log(plans);
     });
   }
   openDialogAjouter(){

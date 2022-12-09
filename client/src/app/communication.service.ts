@@ -4,7 +4,7 @@ import { Injectable } from "@angular/core";
 import { of, Observable, Subject } from "rxjs";
 import { catchError } from "rxjs/operators";
 
-import { Planrepas } from "../../../common/tables/Planrepas";
+import { Planrepas,Fournisseur } from "../../../common/tables/Planrepas";
 
 @Injectable()
 export class CommunicationService {
@@ -43,6 +43,12 @@ export class CommunicationService {
     return this.http
       .delete<number>(this.BASE_URL + `/planrepas/${numeroPlan}`)
       .pipe(catchError(this.handleError<number>("deletePlan")));
+  }
+
+  public getVendors(): Observable<Fournisseur[]> {
+    return this.http
+      .get<Fournisseur[]>(this.BASE_URL + "/vendors")
+      .pipe(catchError(this.handleError<Fournisseur[]>("getVendors")));
   }
 
   private handleError<T>(

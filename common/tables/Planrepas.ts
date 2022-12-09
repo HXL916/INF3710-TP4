@@ -7,3 +7,6 @@ export interface Planrepas {
     price: number;
     numberF: number;
 }
+export interface Fournisseur{
+    number: number;
+}

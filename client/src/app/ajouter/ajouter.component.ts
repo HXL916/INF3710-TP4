@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Planrepas } from '../../../../common/tables/Planrepas';
+import { Fournisseur, Planrepas } from '../../../../common/tables/Planrepas';
 import { CommunicationService } from '../communication.service';
 
 @Component({
@@ -16,18 +16,28 @@ export class AjouterComponent implements OnInit {
   @ViewChild("newCalories") newCalories: ElementRef;
   @ViewChild("newPrice") newPrice: ElementRef;
   @ViewChild("newVendorNumber") newVendorNumber: ElementRef;
-
+  public vendors: Fournisseur[] = [];
+  public selectedVendor:Fournisseur;
+  public plans: Planrepas[] = [];
+  
   public constructor(
     private communicationService: CommunicationService,
     private matDialogRefAjouter: MatDialogRef<AjouterComponent>,
     )
-    {}
-
-  public plans: Planrepas[] = [];
+  {}
 
   ngOnInit(): void {
+    this.getVendors();
   }
 
+  public getVendors(): void {
+    this.communicationService.getVendors().subscribe((vendors: Fournisseur[]) => {
+      this.vendors = vendors;
+    });
+  }
+  public updateSelectedVendor(ID: any) {
+    this.selectedVendor = this.vendors[ID];
+  }
   public insertPlan(): void {
     const plan: Planrepas = {
       number: this.newNumber.nativeElement.innerText,

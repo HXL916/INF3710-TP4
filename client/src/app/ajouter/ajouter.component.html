@@ -32,7 +32,11 @@
           <td class="contentCell" contenteditable="true" placeholder="1" #newPersons></td>
           <td class="contentCell" contenteditable="true" placeholder="200" #newCalories></td>
           <td class="contentCell" contenteditable="true" placeholder="20" #newPrice></td>
-          <td class="contentCell" contenteditable="true" placeholder="111111" #newVendorNumber></td>
+          <td class="contentCell" contenteditable="false" placeholder="111111" #newVendorNumber>
+            <select class="custom-select" id="hotelSelect" (change)="updateSelectedVendor($event.target.options.selectedIndex)">
+              <option *ngFor="let vendor of vendors">{{ vendor.number }}</option>
+            </select>
+          </td>
           <td class="contentCell"></td>
       </tr>
       <mat-dialog-actions>

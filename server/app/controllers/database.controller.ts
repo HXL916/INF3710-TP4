@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { inject, injectable } from "inversify";
 import * as pg from "pg";
-import {PlanrepasDB} from "../../../common/tables/DataBaseClasses";
+import {PlanrepasDB, FournisseurDB} from "../../../common/tables/DataBaseClasses";
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";
-import { Planrepas } from "../../../common/tables/Planrepas";
+import { Planrepas,Fournisseur } from "../../../common/tables/Planrepas";
 
 @injectable()
 export class DatabaseController {
@@ -39,7 +39,22 @@ export class DatabaseController {
           console.error(e.stack);
         });
     });
-
+    router.get("/vendors", (req: Request, res: Response, _: NextFunction) => {
+      this.databaseService
+        .getVendors()
+        .then((result: pg.QueryResult) => {
+          const vendors: Fournisseur[] = [];
+          result.rows.forEach((vendor: FournisseurDB) => {
+            vendors.push({
+              number: vendor.numérofournisseur,
+            });
+          });
+          res.json(vendors);
+        })
+        .catch((e: Error) => {
+          console.error(e.stack);
+        });
+    });
     router.post('/planrepas', (req: Request, res: Response, next: NextFunction) => {
       const planDB: PlanrepasDB = {
         numéroplan: req.body.number,

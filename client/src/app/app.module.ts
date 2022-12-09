@@ -15,7 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ErrorMessageComponent } from './error-message/error-message.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +31,7 @@ import { ErrorMessageComponent } from './error-message/error-message.component';
     FormsModule,
     AppRoutingModule,
     MatDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [CommunicationService],
   bootstrap: [AppComponent],

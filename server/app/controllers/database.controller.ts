@@ -5,7 +5,6 @@ import {PlanrepasDB} from "../../../common/tables/DataBaseClasses";
 import { DatabaseService } from "../services/database.service";
 import Types from "../types";
 import { Planrepas } from "../../../common/tables/Planrepas";
-import { ParameterizedQuery } from "pg-promise";
 
 @injectable()
 export class DatabaseController {
@@ -63,11 +62,36 @@ export class DatabaseController {
         });
     });
 
-    router.delete('/planrepas/:numeroplan', (req: Request, res: Response, next: NextFunction) => {
-      const numéroplan: string = req.params.numeroplan;
+    router.put('/planrepas/:numeroplan', (req: Request, res: Response, next: NextFunction) => {
+      const numeroPlan: string = req.params.numeroplan;
+
+      const planDB: PlanrepasDB = {
+        numéroplan: req.body.number,
+        catégorie: req.body.category,
+        fréquence: req.body.frequency,
+        nbrpersonnes: req.body.persons,
+        nbrcalories: req.body.calories,
+        prix: req.body.price,
+        numérofournisseur: req.body.numberF
+      };
 
       this.databaseService
-        .deletePlan(numéroplan)
+        .updatePlan(planDB, numeroPlan)
+        .then((result: pg.QueryResult) => {
+          res.json(result.rowCount);
+        })
+        .catch((e: Error) => {
+          console.error(e.stack);
+          res.json(-1);
+        });
+    });
+    
+
+    router.delete('/planrepas/:numeroplan', (req: Request, res: Response, next: NextFunction) => {
+      const numeroPlan: string = req.params.numeroplan;
+
+      this.databaseService
+        .deletePlan(numeroPlan)
         .then((result: pg.QueryResult) => {
           res.json(result.rowCount);
         })

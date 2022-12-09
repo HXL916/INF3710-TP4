@@ -51,9 +51,22 @@ export class DatabaseService {
   }
 
   // modify any or all fields of a planrepas
-  public async updatePlan(): Promise<pg.QueryResult> {
+  public async updatePlan(planrepas: PlanrepasDB, oldPK: string): Promise<pg.QueryResult> {
     const client = await this.pool.connect();
-    const res = await client.query(`SELECT * FROM public.$};`);
+
+    const values: string[] = [
+      planrepas.numéroplan.toString(),
+      planrepas.catégorie,
+      planrepas.fréquence.toString(), 
+      planrepas.nbrpersonnes.toString(),
+      planrepas.nbrcalories.toString(),
+      planrepas.prix.toString(),
+      planrepas.numérofournisseur.toString(),
+      oldPK
+    ];
+
+    const queryText = `UPDATE public.planrepas SET numéroplan = $1, catégorie = $2,fréquence = $3,nbrpersonnes = $4,nbrcalories = $5,prix = $6, numérofournisseur = $7 WHERE numéroplan = $8;`;
+    const res = await client.query(queryText, values);
     client.release();
     return res;
   }

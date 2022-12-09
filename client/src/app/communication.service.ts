@@ -33,9 +33,9 @@ export class CommunicationService {
       .pipe(catchError(this.handleError<number>("insertPlan")));
   }
 
-  public updatePlan(plan: Planrepas): Observable<number> {
+  public updatePlan(plan: Planrepas, oldPK: string): Observable<number> {
     return this.http
-      .put<number>(this.BASE_URL + "/planrepas/", plan)
+      .put<number>(this.BASE_URL + `/planrepas/${oldPK}`, plan)
       .pipe(catchError(this.handleError<number>("updatePlan")));
   }
 

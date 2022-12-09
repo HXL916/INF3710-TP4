@@ -28,15 +28,15 @@
     </thead>
     <tbody>
       <tr>
-        <td class="contentCell" contenteditable="true" >{{ selectedPlan.number}}</td>
-        <td class="contentCell" contenteditable="true" >{{ selectedPlan.category }}</td>
-        <td class="contentCell" contenteditable="true" >{{ selectedPlan.frequency }}</td>
-        <td class="contentCell" contenteditable="true" >{{ selectedPlan.persons }}</td>
-        <td class="contentCell" contenteditable="true" >{{ selectedPlan.calories }}</td>
-        <td class="contentCell" contenteditable="true" >{{ selectedPlan.price }}</td>
-        <td class="contentCell" contenteditable="true" >{{ selectedPlan.numberF }}</td>
+        <td class="contentCell" contenteditable="true" #newNumber>{{ selectedPlan.number}}</td>
+        <td class="contentCell" contenteditable="true" #newCategory>{{ selectedPlan.category }}</td>
+        <td class="contentCell" contenteditable="true" #newFrequency>{{ selectedPlan.frequency }}</td>
+        <td class="contentCell" contenteditable="true" #newPersons>{{ selectedPlan.persons }}</td>
+        <td class="contentCell" contenteditable="true" #newCalories>{{ selectedPlan.calories }}</td>
+        <td class="contentCell" contenteditable="true" #newPrice>{{ selectedPlan.price }}</td>
+        <td class="contentCell" contenteditable="true" #newVendorNumber>{{ selectedPlan.numberF }}</td>
       </tr>
     </tbody>
-    <button type="button" class="btn" (click)="updatePlan(selectedPlan.number)">Update</button>
+    <button type="button" class="btn" (click)="updatePlan()">Update</button>
   </table>
 </div>

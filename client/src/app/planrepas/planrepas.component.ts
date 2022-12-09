@@ -17,11 +17,13 @@ export class PlanrepasComponent {
 
   public ngOnInit(): void {
     this.getPlans();
+
   }
 
   public getPlans(): void {
     this.communicationService.getPlans().subscribe((plans: Planrepas[]) => {
       this.plans = plans;
+      this.plans.sort( (a, b) => { return a.number - b.number;});
       console.log(plans);
     });
   }
@@ -30,7 +32,7 @@ export class PlanrepasComponent {
       width: '70%',
       height: '60%',
       disableClose: true,
-    });
+    }).afterClosed().subscribe(() => {this.getPlans()});;
   }
 
   openDialogModifier(){
@@ -38,7 +40,7 @@ export class PlanrepasComponent {
       width: '70%',
       height: '60%',
       disableClose: true,
-    });
+    }).afterClosed().subscribe(() => {this.getPlans()});
   }
 
   openDialogSupprimer(){
@@ -46,6 +48,6 @@ export class PlanrepasComponent {
       width: '70%',
       height: '60%',
       disableClose: true,
-    });
+    }).afterClosed().subscribe(() => {this.getPlans()});;
   }
 }

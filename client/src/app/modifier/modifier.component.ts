@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Planrepas } from "../../../../common/tables/Planrepas";
 import { CommunicationService } from "../communication.service";
@@ -10,8 +10,16 @@ import { CommunicationService } from "../communication.service";
 })
 
 export class ModifierComponent implements OnInit {
+  @ViewChild("newNumber") newNumber: ElementRef;
+  @ViewChild("newCategory") newCategory: ElementRef;
+  @ViewChild("newFrequency") newFrequency: ElementRef;
+  @ViewChild("newPersons") newPersons: ElementRef;
+  @ViewChild("newCalories") newCalories: ElementRef;
+  @ViewChild("newPrice") newPrice: ElementRef;
+  @ViewChild("newVendorNumber") newVendorNumber: ElementRef;
   public plans: Planrepas[] = [];
   public selectedPlan: Planrepas;
+  public oldNumeroPlan: string;
   public constructor(private communicationService: CommunicationService, public matDialogRefModifier: MatDialogRef<ModifierComponent>) {}
 
   public ngOnInit(): void {
@@ -27,9 +35,19 @@ export class ModifierComponent implements OnInit {
   }
   public updateSelected(planID: any) {
     this.selectedPlan = this.plans[planID];
+    this.oldNumeroPlan = this.plans[planID].number.toString();
   }
-  public updatePlan(id: number) {
-    this.communicationService.updatePlan(this.plans[id]).subscribe((res: any) => {
+  public updatePlan() {
+    const plan: Planrepas = {
+      number: this.newNumber.nativeElement.innerText,
+      category: this.newCategory.nativeElement.innerText,
+      frequency: this.newFrequency.nativeElement.innerText,
+      persons: this.newPersons.nativeElement.innerText,
+      calories: this.newCalories.nativeElement.innerText,
+      price: this.newPrice.nativeElement.innerText,
+      numberF: this.newVendorNumber.nativeElement.innerText,
+    };
+    this.communicationService.updatePlan(plan, this.oldNumeroPlan).subscribe((res: any) => {
       this.refresh();
     });
   }

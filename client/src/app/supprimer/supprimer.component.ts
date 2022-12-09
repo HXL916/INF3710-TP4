@@ -40,4 +40,5 @@ export class SupprimerComponent implements OnInit {
   public closeModale() {
     this.matDialogRefSupprimer.close();
   }
+
 }

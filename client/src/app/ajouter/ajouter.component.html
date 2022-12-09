@@ -15,23 +15,13 @@
         <th class="contentCell">numéro fournisseur</th>
       </thead>
       <tbody>
-        <tr *ngFor="let plan of plans; let i = index">
-          <td class="contentCell" contenteditable="true" >{{ plan.number}}</td>
-          <td class="contentCell" contenteditable="true" >{{ plan.category }}</td>
-          <td class="contentCell" contenteditable="true" >{{ plan.frequency }}</td>
-          <td class="contentCell" contenteditable="true" >{{ plan.persons }}</td>
-          <td class="contentCell" contenteditable="true" >{{ plan.calories }}</td>
-          <td class="contentCell" contenteditable="true" >{{ plan.price }}</td>
-          <td class="contentCell" contenteditable="true" >{{ plan.numberF }}</td>
-        </tr>
-
         <tr class="blank_row">
-          <td class="contentCell" contenteditable="true" placeholder="211" #newNumber></td>
+          <td class="contentCell" class="allow_only_numbers" oninput="this.value=this.value.replace(/[^0-9]/g,'');" contenteditable="true" placeholder="211" #newNumber></td>
           <td class="contentCell" contenteditable="true" placeholder="1" #newCategory></td>
-          <td class="contentCell" contenteditable="true" placeholder="1" #newFrequency></td>
-          <td class="contentCell" contenteditable="true" placeholder="1" #newPersons></td>
-          <td class="contentCell" contenteditable="true" placeholder="200" #newCalories></td>
-          <td class="contentCell" contenteditable="true" placeholder="20" #newPrice></td>
+          <td class="contentCell" class="allow_only_numbers" contenteditable="true" placeholder="1" #newFrequency></td>
+          <td class="contentCell" class="allow_only_numbers" contenteditable="true" placeholder="1" #newPersons></td>
+          <td class="contentCell" class="allow_only_numbers" contenteditable="true" placeholder="200" #newCalories></td>
+          <td class="contentCell" class="allow_only_numbers" contenteditable="true" placeholder="20" #newPrice></td>
           <td class="contentCell" contenteditable="false" #newVendorNumber>
             <select class="custom-select" id="hotelSelect" (change)="updateSelectedVendor($event.target.options.selectedIndex)">
               <option *ngFor="let vendor of vendors">{{ vendor.number }}</option>
@@ -39,10 +29,9 @@
           </td>
           <td class="contentCell"></td>
       </tr>
-      <mat-dialog-actions>
         <button type="button" class="btn" (click)="insertPlan()" >Insert</button>
-      </mat-dialog-actions>
       </tbody>
+      
     </table>
 
   </div>

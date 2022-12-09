@@ -9,7 +9,6 @@
     background-color: white;
     text-align: left;
 }
-
 .divider {
     border-bottom: 1px solid #9A75F0;
     margin: auto;
@@ -72,4 +71,3 @@
 .blank_row:not(.nohover):hover {
     color: #9A75F0;
 }
-

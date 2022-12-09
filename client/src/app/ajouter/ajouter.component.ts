@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Fournisseur, Planrepas } from '../../../../common/tables/Planrepas';
 import { CommunicationService } from '../communication.service';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 @Component({
   selector: 'app-ajouter',
@@ -18,11 +19,11 @@ export class AjouterComponent implements OnInit {
   @ViewChild("newVendorNumber") newVendorNumber: ElementRef;
   public vendors: Fournisseur[] = [];
   public selectedVendor:Fournisseur;
-  public plans: Planrepas[] = [];
 
   public constructor(
     private communicationService: CommunicationService,
     private matDialogRefAjouter: MatDialogRef<AjouterComponent>,
+    public dialog: MatDialog,
     )
   {}
 
@@ -49,6 +50,9 @@ export class AjouterComponent implements OnInit {
       price: this.newPrice.nativeElement.innerText,
       numberF: this.selectedVendor.number
     };
+    let request :boolean = true;
+    
+
     if(this.newNumber.nativeElement.innerText == "")
       plan.number = 211;
     if(this.newCategory.nativeElement.innerText == "")
@@ -63,12 +67,20 @@ export class AjouterComponent implements OnInit {
       plan.price = 20;
     if(this.newVendorNumber.nativeElement.innerText == "")
       plan.numberF = 111111;
+
+    request = !this.verifyInputType(plan);
+
+    if(request){
     this.communicationService.insertPlan(plan).subscribe((res: number) => {
       if (res > 0) {
         this.communicationService.filter("insert");
       }
       this.refresh();
     });
+  }
+  else{
+
+  }
   }
 
   private refresh() {
@@ -83,5 +95,37 @@ export class AjouterComponent implements OnInit {
 
   public closeModale() {
     this.matDialogRefAjouter.close();
+  }
+
+  private containsOnlyNumbers(value: any) {
+    return /^[0-9]+$/.test(value);
+  }
+  private verifyInputType(plan: Planrepas) :boolean{
+    let errorMessage : string = "Impossible d'ajouter le plan, les types d'entrées sont erronés: \n";
+    let errorHappen: boolean = false;
+    if(!this.containsOnlyNumbers(plan.number))
+    errorMessage += "Numéro du plan fourni ne s'agit pas d'un type number \n"
+    if(!this.containsOnlyNumbers(plan.frequency))
+    errorMessage += "Fréquence du plan fourni ne s'agit pas d'un type number \n"
+    if(!this.containsOnlyNumbers(plan.persons))
+    errorMessage += "nombre de personnes du plan fourni ne s'agit pas d'un type number \n"
+    if(!this.containsOnlyNumbers(plan.calories))
+    errorMessage += "Calories du plan fourni ne s'agit pas d'un type number \n"
+    if(!this.containsOnlyNumbers(plan.price))
+    errorMessage += "Prix du plan fourni ne s'agit pas d'un type number \n"
+
+    if(errorMessage != "Impossible d'ajouter le plan, les types d'entrées sont erronés: \n")
+      errorHappen = true;
+    if(errorHappen)
+      this.openErrorMessage(errorMessage);
+    return errorHappen;
+  }
+  private openErrorMessage(errorMessage: string){
+    this.dialog.open(ErrorMessageComponent, {
+      hasBackdrop :true,
+      data: errorMessage,
+      width: '30%',
+      height: '30%',
+    });
   }
 }

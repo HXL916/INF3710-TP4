@@ -82,7 +82,7 @@ export class DatabaseService {
     if (!numeroplan) throw new Error("La clé primaire est invalide !");
 
     const client = await this.pool.connect();
-    const query = `DELETE FROM public.planrepas WHERE numéroplan = '${numeroplan}' CASCADE;`;
+    const query = `DELETE FROM public.planrepas WHERE numéroplan = '${numeroplan}';`;
 
     const res = await client.query(query);
     client.release();

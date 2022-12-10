@@ -18,3 +18,5 @@ Tutoriel du projet d'INF3710
 - Allez dans `/server` et faites `npm start`​
 
 - Allez dans `/client` et faites `npm start`​
+
+## Référence: Application Tutoriel du cours INF3710

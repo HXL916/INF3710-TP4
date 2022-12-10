@@ -8,9 +8,9 @@ import { PlanrepasDB } from "../../../common/tables/DataBaseClasses";
 export class DatabaseService {
   // TODO: A MODIFIER POUR VOTRE BD
   public connectionConfig: pg.ConnectionConfig = {
-    user: "user",
+    user: "postgres",
     database: "TP4_Livraison",
-    password: "1",
+    password: "d2Xvq5-f*L3V",
     port: 5432,
     host: "127.0.0.1",
     keepAlive: true,

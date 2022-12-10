@@ -35,6 +35,7 @@ export class ModifierComponent implements OnInit {
       this.plans = plans;
       this.plans.sort( (a, b) => { return a.number - b.number;});
       this.selectedPlan = plans[0];
+      this.oldNumeroPlan = this.plans[0].number.toString();
       this.updateVendorList();
     });
   }
@@ -74,6 +75,7 @@ export class ModifierComponent implements OnInit {
       price: this.newPrice.nativeElement.innerText,
       numberF: this.selectedVendor.number
     };
+    console.log(plan);
     let request :boolean = true;
     request = !this.verifyInput(plan);
 
